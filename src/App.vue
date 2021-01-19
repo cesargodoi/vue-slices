@@ -1,12 +1,15 @@
 <template>
   <the-header />
+  <the-slices />
 </template>
 
 <script>
-import TheHeader from "./components/layouts/TheHeader";
+import TheHeader from "./components/layouts/TheHeader.vue";
+import TheSlices from "./components/slices/TheSlices.vue";
+
 export default {
   name: "App",
-  components: { TheHeader },
+  components: { TheHeader, TheSlices },
 };
 </script>
 
