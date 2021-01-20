@@ -1,9 +1,10 @@
 <template>
-  <h2>{{ slice.slice }}</h2>
-  <p>{{ slice.description }}</p>
-  <ul>
-    <li v-for="example in slice.examples" :key="example">{{ example }}</li>
-  </ul>
+  <base-card>
+    <h2>{{ slice.slice }}</h2>
+    <button>X</button>
+    <p>{{ slice.description }}</p>
+    <a :href="slice.link">Saiba mais</a>
+  </base-card>
 </template>
 
 <script>

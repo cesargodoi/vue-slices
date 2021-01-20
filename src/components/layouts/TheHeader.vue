@@ -14,7 +14,7 @@ h1 {
   margin: 0;
   padding: 15px;
   color: antiquewhite;
-  background-color: rgb(13, 107, 55);
+  background-color: #0d6b37;
   text-align: center;
 }
 </style>
