@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>The Slices</h1>
     <base-card>
       <base-button :bClass="showBClass" @click="alternateTab('show-slices')">
         Show Slices
@@ -9,7 +8,9 @@
         Add Slice
       </base-button>
     </base-card>
-    <component :is="selectedTab" />
+    <keep-alive>
+      <component :is="selectedTab" />
+    </keep-alive>
   </div>
 </template>
 
@@ -52,10 +53,20 @@ export default {
     alternateTab(tab) {
       return (this.selectedTab = tab);
     },
+    setSlice(slice, descr, link) {
+      const newSlice = {
+        id: new Date().toISOString(),
+        slice: slice,
+        description: descr,
+        link: link,
+      };
+      this.storedSlices.unshift(newSlice);
+    },
   },
   provide() {
     return {
       slices: this.storedSlices,
+      setSlice: this.setSlice,
     };
   },
 };
