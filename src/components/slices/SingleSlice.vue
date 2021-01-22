@@ -2,7 +2,9 @@
   <base-card>
     <header>
       <h2>{{ slice.slice }}</h2>
-      <base-button bClass="flat">delete</base-button>
+      <base-button bClass="flat" @click="delSlice(slice.id)">
+        delete
+      </base-button>
     </header>
     <p>{{ slice.description }}</p>
     <a :href="slice.link">Saiba mais</a>
@@ -11,7 +13,8 @@
 
 <script>
 export default {
-  name: "TheSlices",
+  name: "SilgleSlice",
+  inject: ["delSlice"],
   props: { slice: Object },
 };
 </script>
@@ -20,6 +23,6 @@ export default {
 header {
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: center;
 }
 </style>

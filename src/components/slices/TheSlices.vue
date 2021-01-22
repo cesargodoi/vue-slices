@@ -1,13 +1,5 @@
 <template>
   <div>
-    <base-card>
-      <base-button :bClass="showBClass" @click="alternateTab('show-slices')">
-        Show Slices
-      </base-button>
-      <base-button :bClass="addBClass" @click="alternateTab('add-slice')">
-        Add Slice
-      </base-button>
-    </base-card>
     <keep-alive>
       <component :is="selectedTab" />
     </keep-alive>
@@ -20,39 +12,28 @@ import ShowSlices from "./ShowSlices.vue";
 export default {
   components: { ShowSlices, AddSlice },
   name: "TheSlices",
+  props: { selectedTab: String },
   data() {
     return {
-      selectedTab: "show-slices",
       storedSlices: [
         {
           id: 1,
-          slice: "$emit",
+          slice: "v-if",
           description:
-            "Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá.",
-          link: "https://vuejs.org/",
+            "A diretiva v-if é usada para renderizar condicionalmente um bloco. O bloco só será renderizado se a expressão da diretiva retornar um valor verdadeiro.",
+          link: "https://br.vuejs.org/v2/guide/conditional.html",
         },
         {
           id: 2,
           slice: "v-for",
           description:
-            "Manduma pindureta quium dia nois paga. In elementis mé pra quem é amistosis quis leo.",
-          link: "https://stackoverflow.com/",
+            "A diretiva v-for é usada para renderizar uma lista de elementos com base nos dados de um Array. Sua sintaxe é: 'item in items'. Onde items é a fonte de dados e item é um apelido para o elemento iterado.",
+          link: "https://br.vuejs.org/v2/guide/list.html",
         },
       ],
     };
   },
-  computed: {
-    showBClass() {
-      return this.selectedTab === "show-slices" ? null : "flat";
-    },
-    addBClass() {
-      return this.selectedTab === "add-slice" ? null : "flat";
-    },
-  },
   methods: {
-    alternateTab(tab) {
-      return (this.selectedTab = tab);
-    },
     setSlice(slice, descr, link) {
       const newSlice = {
         id: new Date().toISOString(),
@@ -61,20 +42,27 @@ export default {
         link: link,
       };
       this.storedSlices.unshift(newSlice);
+      this.$emit("showSlices");
+    },
+    delSlice(id) {
+      let objIndex = this.storedSlices.findIndex((obj) => obj.id === id);
+      this.storedSlices.splice(objIndex, 1);
     },
   },
   provide() {
     return {
       slices: this.storedSlices,
       setSlice: this.setSlice,
+      delSlice: this.delSlice,
     };
   },
+  emits: ["showSlices"],
 };
 </script>
 
 <style scoped>
 div {
   margin: auto;
-  width: 80%;
+  width: 90%;
 }
 </style>

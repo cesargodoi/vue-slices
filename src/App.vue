@@ -1,15 +1,32 @@
 <template>
-  <the-header />
-  <the-slices />
+  <the-navbar
+    title="Slices"
+    :selectedTab="selectedTab"
+    @alternateTab="alternateTab"
+  />
+  <the-slices :selectedTab="selectedTab" @showSlices="showSlices" />
 </template>
 
 <script>
-import TheHeader from "./components/layouts/TheHeader.vue";
+import TheNavbar from "./components/layouts/TheNavbar.vue";
 import TheSlices from "./components/slices/TheSlices.vue";
 
 export default {
   name: "App",
-  components: { TheHeader, TheSlices },
+  components: { TheSlices, TheNavbar },
+  data() {
+    return {
+      selectedTab: "show-slices",
+    };
+  },
+  methods: {
+    alternateTab(tab) {
+      return (this.selectedTab = tab);
+    },
+    showSlices() {
+      this.selectedTab = "show-slices";
+    },
+  },
 };
 </script>
 
